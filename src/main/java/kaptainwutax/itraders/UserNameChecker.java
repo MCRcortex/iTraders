@@ -59,10 +59,16 @@ public class UserNameChecker {
 
         NBTTagCompound display = item.getTagCompound().getCompoundTag("display");
 
-        if (display != null && !display.hasKey("Name"))
+        if (display == null)
             return "";
-
-        return UserNameChecker.getTextFormatting(display.getString("Name"));
+        if(!display.hasKey("Name"))
+            return "";
+        
+        String name=display.getString("Name");
+        if(name.contains(" "))
+            return "";
+        
+        return UserNameChecker.getTextFormatting(name);
     }
 
 }
